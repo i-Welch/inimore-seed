@@ -1,0 +1,23 @@
+{
+  "name": "inimore-cont",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jss": "^10.0.0",
+    "hyperscript": "^2.0.2",
+    "jss": "^10.4.0",
+    "jss-preset-default": "^10.4.0",
+    "parcel": "^1.12.4",
+    "rxjs": "^6.6.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.3"
+  }
+}
