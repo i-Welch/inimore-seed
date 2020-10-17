@@ -10,14 +10,7 @@ import { IGet } from "./types/get.interface";
 import { ISet } from "./types/set.interface";
 import { ITransform } from "./types/transform.interface";
 
-// ** deprecated;
-export interface IBatchSetInfo {
-	path: Path;
-	// tslint:disable-next-line:no-any
-	value: any;
-}
-
-export interface IStoreTyped<Data extends object> {
+export interface IStoreTyped<Data extends Record<string, unknown>> {
 	getSync: IGetSync<Data>;
 	get: IGet<Data>;
 	set: ISet<Data, void>;
@@ -28,7 +21,7 @@ export interface IStoreTyped<Data extends object> {
 	getFromStore: IGetFromStore<Data>;
 }
 
-export class StoreUtility<TData extends object> implements IStoreTyped<TData> {
+export class StoreUtility<TData extends Record<string, unknown>> implements IStoreTyped<TData> {
 	private data$: BehaviorSubject<TData>;
 
 	private constructor(initialData: TData) {
@@ -36,7 +29,7 @@ export class StoreUtility<TData extends object> implements IStoreTyped<TData> {
 	}
 
 	// static method "create" & private constructor to enforce IStoreTyped type and typesafety for users
-	public static create<T extends object>(initialData: T): IStoreTyped<T> {
+	public static create<T extends Record<string, unknown>>(initialData: T): IStoreTyped<T> {
 		return new StoreUtility(initialData);
 	}
 
@@ -64,12 +57,12 @@ export class StoreUtility<TData extends object> implements IStoreTyped<TData> {
 	}
 
 	// // e.g storeService.transform(["count"], (count) => {return count + 1})
-	// // NOTE: don't forget to make a shallow copy when you return an object
+	// // NOTE: don't forget to make a shallow copy when you return an Record<string, unknown>
 	public transform<T>(path: Path, transformer: (data: T) => T): void {
 		this.batch().transform(path, transformer).commit();
 	}
 
-	public extend<T extends object>(path: Path, updates: Partial<T>): void {
+	public extend<T extends Record<string, unknown>>(path: Path, updates: Partial<T>): void {
 		this.batch().extend(path, updates).commit();
 	}
 
@@ -79,7 +72,7 @@ export class StoreUtility<TData extends object> implements IStoreTyped<TData> {
 			? this.get<T>(path)
 			: this.getDataAndSet(path, getData).pipe(
 				switchMap(() => this.get<T>(path))
-			);
+			) as Observable<T>;
 	}
 
 	private getDataAndSet<T>(

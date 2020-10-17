@@ -1,6 +1,4 @@
-import * as React from "../lib/react";
-
-export const b = (onClick: () => void) => 
-<button onclick={() => onClick()}>
-click me
-</button>
+export const b = (onClick: () => void): Element => 
+	<button onclick={onClick}>
+	click me
+	</button>;
