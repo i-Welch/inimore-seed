@@ -3,18 +3,18 @@
 		"env"
 	],
 	"plugins": [
-	  [
-		"babel-plugin-transform-react-jsx",
-		{
-		  "pragma": "inimore"
-		}
-	  ],
-	  [
-		  "babel-plugin-jsx-pragmatic",
-		  {
-			  "module": "/lib/react.js",
-			  "import": "inimore"
-		  }
-	  ]
+		[
+			"babel-plugin-transform-react-jsx",
+			{
+				"pragma": "inimore"
+			}
+		],
+		[
+			"babel-plugin-jsx-pragmatic",
+			{
+				"module": "/lib/inimore.js",
+				"import": "inimore"
+			}
+		]
 	]
 }
