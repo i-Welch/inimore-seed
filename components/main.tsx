@@ -1,4 +1,4 @@
 export const main = (): Element => 
 	<div>
-		Inimore Works !
+		Inimore Works! Even better then before :)
 	</div>;
